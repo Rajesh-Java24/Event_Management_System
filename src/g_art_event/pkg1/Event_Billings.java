@@ -1,0 +1,636 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package g_art_event.pkg1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+
+/**
+ *
+ * @author ADMIN
+ */
+public class Event_Billings extends javax.swing.JFrame {
+
+    /**
+     * Creates new form Event_Billings
+     */
+    public Event_Billings() {
+        initComponents();
+        fetch();
+    }
+     public void fetch(){
+        try
+        {
+           Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+           Connection con=DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databasename=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh"); 
+           PreparedStatement pst = con.prepareStatement("exec fetch_Billing_Resources");
+           ResultSet rs = pst.executeQuery();
+           Billing_Resources_Table.setModel(DbUtils.resultSetToTableModel(rs));
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+    }
+    
+     public void Com_Billed_by(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con=DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databasename=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh");
+            PreparedStatement pst = con.prepareStatement("exec Build_by");
+            ResultSet rs = pst.executeQuery();  
+            Com_Billed_by.removeAllItems();
+            while(rs.next()){
+              Com_Billed_by.addItem(rs.getString("Employee_Name"));
+            }  
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+  } 
+     public void Com_Mahal_Name(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con=DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databasename=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh");
+            PreparedStatement pst = con.prepareStatement("exec Com_Mahal_Name");
+            ResultSet rs = pst.executeQuery();  
+            Com_Mahal_Name.removeAllItems();
+            while(rs.next()){
+             Com_Mahal_Name.addItem(rs.getString("Mahal_Name"));
+            }  
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+  } 
+     public void Com_Services(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con=DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databasename=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh");
+            PreparedStatement pst = con.prepareStatement("exec Combo_Services");
+            ResultSet rs = pst.executeQuery();  
+            Com_Services.removeAllItems();
+            while(rs.next()){
+             Com_Services.addItem(rs.getString("Ventor_Srvices"));
+            }  
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+  } 
+     public void Com_Customer_Name(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con=DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databasename=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh");
+            PreparedStatement pst = con.prepareStatement("exec Com_Customer_Name");
+            ResultSet rs = pst.executeQuery();  
+            Com_Customer_Name.removeAllItems();
+            while(rs.next()){
+             Com_Customer_Name.addItem(rs.getString("Customer_Name"));
+            }  
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+  } 
+     public void Com_Event_Name(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con=DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databasename=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh");
+            PreparedStatement pst = con.prepareStatement("exec Com_Event_Name");
+            ResultSet rs = pst.executeQuery();  
+            Com_Event_Name.removeAllItems();
+            while(rs.next()){
+             Com_Event_Name.addItem(rs.getString("Event_Name"));
+            }  
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+     }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        Com_Billed_by = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Billing_Resources_Table = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Billing_Event_Table = new javax.swing.JTable();
+        Billing_amount = new javax.swing.JLabel();
+        txt_Billing_Amount = new javax.swing.JTextField();
+        Gst = new javax.swing.JLabel();
+        txt_Gst = new javax.swing.JTextField();
+        Gst1 = new javax.swing.JLabel();
+        txt_Total_Amount = new javax.swing.JTextField();
+        Com_Customer_Name = new javax.swing.JComboBox<>();
+        Customer_Name = new javax.swing.JLabel();
+        Billed_by = new javax.swing.JLabel();
+        txt_Id = new javax.swing.JTextField();
+        Id = new javax.swing.JLabel();
+        Resource_Name = new javax.swing.JLabel();
+        Com_Mahal_Name = new javax.swing.JComboBox<>();
+        Services = new javax.swing.JLabel();
+        Com_Services = new javax.swing.JComboBox<>();
+        Event_Start_date = new javax.swing.JLabel();
+        txt_Start_Date = new com.toedter.calendar.JDateChooser();
+        Event_End_Date = new javax.swing.JLabel();
+        txt_End_Date = new com.toedter.calendar.JDateChooser();
+        Billing_Amount = new javax.swing.JLabel();
+        txt_BillingAmount = new javax.swing.JTextField();
+        btn_Add_Event = new javax.swing.JButton();
+        Event_Name = new javax.swing.JLabel();
+        Com_Event_Name = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        btn_Fetch = new javax.swing.JButton();
+        btn_Next = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Com_Billed_by.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(Com_Billed_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 137, -1));
+
+        Billing_Resources_Table.setBackground(new java.awt.Color(255, 204, 0));
+        Billing_Resources_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Resources Name", "Customer Name", "Services", "Event Start Date", "Event End Date", "Amount"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Billing_Resources_Table.setRowHeight(40);
+        Billing_Resources_Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Billing_Resources_TableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Billing_Resources_Table);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 673, 310));
+
+        Billing_Event_Table.setBackground(new java.awt.Color(255, 204, 0));
+        Billing_Event_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Build By", "Resource_Name", "Event Name", "Services", "Event_Start_Date", "Event_End_Date", "Billing Amount"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(Billing_Event_Table);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 799, 260));
+
+        Billing_amount.setBackground(new java.awt.Color(0, 255, 0));
+        Billing_amount.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Billing_amount.setText("Billing Amount");
+        Billing_amount.setOpaque(true);
+        getContentPane().add(Billing_amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 460, 150, -1));
+
+        txt_Billing_Amount.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(txt_Billing_Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 460, 125, -1));
+
+        Gst.setBackground(new java.awt.Color(0, 255, 0));
+        Gst.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Gst.setText("Gst");
+        Gst.setOpaque(true);
+        getContentPane().add(Gst, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 520, 150, -1));
+
+        txt_Gst.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(txt_Gst, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 520, 125, -1));
+
+        Gst1.setBackground(new java.awt.Color(0, 255, 0));
+        Gst1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Gst1.setText("Total Amount");
+        Gst1.setOpaque(true);
+        getContentPane().add(Gst1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 580, 150, -1));
+
+        txt_Total_Amount.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(txt_Total_Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 580, 125, -1));
+
+        Com_Customer_Name.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(Com_Customer_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 141, -1));
+
+        Customer_Name.setBackground(new java.awt.Color(0, 255, 255));
+        Customer_Name.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Customer_Name.setText("Customer Name");
+        Customer_Name.setOpaque(true);
+        getContentPane().add(Customer_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
+
+        Billed_by.setBackground(new java.awt.Color(0, 255, 255));
+        Billed_by.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Billed_by.setText("Billed By");
+        Billed_by.setOpaque(true);
+        getContentPane().add(Billed_by, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 99, -1));
+
+        txt_Id.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(txt_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 70, 140, -1));
+
+        Id.setBackground(new java.awt.Color(0, 255, 255));
+        Id.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Id.setText("Id");
+        Id.setOpaque(true);
+        getContentPane().add(Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 70, 150, -1));
+
+        Resource_Name.setBackground(new java.awt.Color(0, 255, 255));
+        Resource_Name.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Resource_Name.setText("Resource Name");
+        Resource_Name.setOpaque(true);
+        getContentPane().add(Resource_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 150, 160, -1));
+
+        Com_Mahal_Name.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Com_Mahal_Name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Com_Mahal_NameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Com_Mahal_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, 144, -1));
+
+        Services.setBackground(new java.awt.Color(0, 255, 255));
+        Services.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Services.setText("Services");
+        Services.setOpaque(true);
+        getContentPane().add(Services, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 160, -1));
+
+        Com_Services.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(Com_Services, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, 150, -1));
+
+        Event_Start_date.setBackground(new java.awt.Color(0, 255, 255));
+        Event_Start_date.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Event_Start_date.setText("Event Start Date");
+        Event_Start_date.setOpaque(true);
+        getContentPane().add(Event_Start_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 70, -1, -1));
+
+        txt_Start_Date.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(txt_Start_Date, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 70, 154, -1));
+
+        Event_End_Date.setBackground(new java.awt.Color(51, 255, 255));
+        Event_End_Date.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Event_End_Date.setText("Event End Date");
+        Event_End_Date.setOpaque(true);
+        getContentPane().add(Event_End_Date, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 150, 170, -1));
+
+        txt_End_Date.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(txt_End_Date, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 150, 154, -1));
+
+        Billing_Amount.setBackground(new java.awt.Color(0, 255, 255));
+        Billing_Amount.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Billing_Amount.setText("Billing Amount");
+        Billing_Amount.setOpaque(true);
+        getContentPane().add(Billing_Amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 220, 170, -1));
+
+        txt_BillingAmount.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(txt_BillingAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 220, 154, -1));
+
+        btn_Add_Event.setBackground(new java.awt.Color(0, 0, 0));
+        btn_Add_Event.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        btn_Add_Event.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Add_Event.setText("Add Event");
+        btn_Add_Event.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Add_EventActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Add_Event, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 290, -1, -1));
+
+        Event_Name.setBackground(new java.awt.Color(0, 255, 255));
+        Event_Name.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        Event_Name.setText("Event Name");
+        Event_Name.setOpaque(true);
+        getContentPane().add(Event_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 130, -1));
+
+        Com_Event_Name.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        getContentPane().add(Com_Event_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, 137, -1));
+
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton2.setText("X");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 10, -1, -1));
+
+        btn_Fetch.setBackground(new java.awt.Color(0, 0, 0));
+        btn_Fetch.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        btn_Fetch.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Fetch.setText("Fetch");
+        btn_Fetch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_FetchActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Fetch, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 650, -1, -1));
+
+        btn_Next.setBackground(new java.awt.Color(0, 0, 0));
+        btn_Next.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        btn_Next.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Next.setText("Next");
+        btn_Next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NextActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_Next, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 650, 82, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/g_art_event/images/billing.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 730));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void Billing_Resources_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Billing_Resources_TableMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = Billing_Resources_Table.getSelectedRow();
+        txt_Id.setText( Billing_Resources_Table.getValueAt(selectedRow, 0).toString());
+        String Mahal_Name = Billing_Resources_Table.getValueAt(selectedRow,1).toString();
+        for(int i=0; i<Com_Mahal_Name.getItemCount(); i++){
+            if(Com_Mahal_Name.getItemAt(i).toString().equalsIgnoreCase(Mahal_Name)){
+                Com_Mahal_Name.setSelectedIndex(i);
+            }
+        }
+        String Event_Name = Billing_Resources_Table.getValueAt(selectedRow,2).toString();
+        for(int i=0; i<Com_Event_Name.getItemCount(); i++){
+            if(Com_Event_Name.getItemAt(i).toString().equalsIgnoreCase(Event_Name)){
+                Com_Event_Name.setSelectedIndex(i);
+            }
+        }
+        String Services = Billing_Resources_Table.getValueAt(selectedRow,4).toString();
+        for(int i=0; i<Com_Services.getItemCount(); i++){
+            if(Com_Services.getItemAt(i).toString().equalsIgnoreCase(Services)){
+                Com_Services.setSelectedIndex(i);
+            }
+        }
+        String Customer_Name = Billing_Resources_Table.getValueAt(selectedRow,3).toString();
+        for(int i=0; i<Com_Customer_Name.getItemCount(); i++){
+            if(Com_Customer_Name.getItemAt(i).toString().equalsIgnoreCase(Customer_Name)){
+                Com_Customer_Name.setSelectedIndex(i);
+            }
+        }
+        txt_Start_Date.setDate((Date) Billing_Resources_Table.getValueAt(selectedRow, 6));
+        txt_End_Date.setDate((Date) Billing_Resources_Table.getValueAt(selectedRow, 7));
+        txt_BillingAmount.setText(Billing_Resources_Table.getValueAt(selectedRow, 8).toString());
+
+    }//GEN-LAST:event_Billing_Resources_TableMouseClicked
+
+    private void Com_Mahal_NameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Com_Mahal_NameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Com_Mahal_NameActionPerformed
+
+    private void btn_Add_EventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Add_EventActionPerformed
+        // TODO add your handling code here:
+        // Validate input fields
+        if (Com_Billed_by.getSelectedItem() == null ||
+            Com_Mahal_Name.getSelectedItem() == null ||
+            Com_Event_Name.getSelectedItem() == null ||
+            Com_Services.getSelectedItem() == null ||
+            txt_Start_Date.getDate() == null ||
+            txt_End_Date.getDate() == null ||
+            txt_BillingAmount.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Enter All Data", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            // Connect to the database
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databasename=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh");
+
+            // Prepare the SQL statement
+            PreparedStatement pst = con.prepareStatement("exec add_billing ?,?,?,?,?,?,?");
+            pst.setString(1, Com_Billed_by.getSelectedItem().toString());
+            pst.setString(2, Com_Mahal_Name.getSelectedItem().toString());
+            pst.setString(3, Com_Event_Name.getSelectedItem().toString());
+            pst.setString(4, Com_Services.getSelectedItem().toString());
+
+            // Format dates
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date1 = sdf.format(txt_Start_Date.getDate());
+            pst.setString(5, date1);
+            String date2 = sdf.format(txt_End_Date.getDate());
+            pst.setString(6, date2);
+
+            // Set total amount
+            pst.setString(7, txt_BillingAmount.getText());
+            pst.executeUpdate();
+
+            // Add the new billing record to the table
+            DefaultTableModel model = (DefaultTableModel) Billing_Event_Table.getModel();
+            model.addRow(new Object[]{
+                Com_Billed_by.getSelectedItem().toString(),
+                Com_Mahal_Name.getSelectedItem().toString(),
+                Com_Event_Name.getSelectedItem().toString(),
+                Com_Services.getSelectedItem().toString(),
+                date1,
+                date2,
+                txt_BillingAmount.getText()
+            });
+
+            // Recalculate the total amount
+            float Total_Amount = 0;
+            for (int row = 0; row < model.getRowCount(); row++) {
+                Total_Amount += Double.parseDouble(model.getValueAt(row, 6).toString()); // Corrected to float.parseDouble
+            }
+
+            // Update billing amount text field
+            txt_Billing_Amount.setText(String.valueOf(Total_Amount));
+
+            // Calculate GST
+            float Gst = (Total_Amount * 18) / 100;
+            txt_Gst.setText(String.valueOf(Gst));
+
+            // Calculate total amount including GST
+            float Total_Amount_with_Gst = Total_Amount + Gst;
+            txt_Total_Amount.setText(String.valueOf(Total_Amount_with_Gst));
+
+            // Show confirmation message
+            JOptionPane.showMessageDialog(null, "Bill Added");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_Add_EventActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        Dashboard_Users dash = new Dashboard_Users();
+        dash.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btn_FetchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FetchActionPerformed
+        // TODO add your handling code here:
+        if (Com_Billed_by.getSelectedItem() == null ||
+            Com_Customer_Name.getSelectedItem() == null ||
+            Com_Mahal_Name.getSelectedItem() == null ||
+            Com_Event_Name.getSelectedItem() == null ||
+            txt_Start_Date.getDate() == null ||
+            txt_End_Date.getDate() == null ||
+            txt_Total_Amount.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Please Enter All Data", "Insert", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try
+        {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            java.sql.Connection con = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-QBNMT1Q;databaseName=G_Art_Event_1;TrustServerCertificate=True;user=Rajesh;password=Rajesh");
+            PreparedStatement pst = con.prepareStatement("exec add_Total_billing ?,?,?,?,?,?,?");
+            pst.setString(1, Com_Billed_by.getSelectedItem().toString());
+            pst.setString(2, Com_Customer_Name.getSelectedItem().toString());
+            pst.setString(3, Com_Mahal_Name.getSelectedItem().toString());
+            pst.setString(4, Com_Event_Name.getSelectedItem().toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String date1 = sdf.format(txt_Start_Date.getDate());
+            pst.setString(5, date1);
+            String date2 = sdf.format(txt_End_Date.getDate());
+            pst.setString(6, date2);
+            pst.setString(7, txt_Total_Amount.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this,"Fetched data successfuly", "Success", JOptionPane.DEFAULT_OPTION);
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_FetchActionPerformed
+
+    private void btn_NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NextActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        Print_Recipts print = new Print_Recipts();
+        print.setVisible(true);
+    }//GEN-LAST:event_btn_NextActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        Com_Billed_by();
+        Com_Mahal_Name();
+        Com_Services();
+        Com_Customer_Name();
+        Com_Event_Name();
+    }//GEN-LAST:event_formWindowOpened
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Event_Billings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Event_Billings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Event_Billings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Event_Billings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Event_Billings().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Billed_by;
+    private javax.swing.JLabel Billing_Amount;
+    private javax.swing.JTable Billing_Event_Table;
+    private javax.swing.JTable Billing_Resources_Table;
+    private javax.swing.JLabel Billing_amount;
+    private javax.swing.JComboBox<String> Com_Billed_by;
+    private javax.swing.JComboBox<String> Com_Customer_Name;
+    private javax.swing.JComboBox<String> Com_Event_Name;
+    private javax.swing.JComboBox<String> Com_Mahal_Name;
+    private javax.swing.JComboBox<String> Com_Services;
+    private javax.swing.JLabel Customer_Name;
+    private javax.swing.JLabel Event_End_Date;
+    private javax.swing.JLabel Event_Name;
+    private javax.swing.JLabel Event_Start_date;
+    private javax.swing.JLabel Gst;
+    private javax.swing.JLabel Gst1;
+    private javax.swing.JLabel Id;
+    private javax.swing.JLabel Resource_Name;
+    private javax.swing.JLabel Services;
+    private javax.swing.JButton btn_Add_Event;
+    private javax.swing.JButton btn_Fetch;
+    private javax.swing.JButton btn_Next;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField txt_BillingAmount;
+    private javax.swing.JTextField txt_Billing_Amount;
+    private com.toedter.calendar.JDateChooser txt_End_Date;
+    private javax.swing.JTextField txt_Gst;
+    private javax.swing.JTextField txt_Id;
+    private com.toedter.calendar.JDateChooser txt_Start_Date;
+    private javax.swing.JTextField txt_Total_Amount;
+    // End of variables declaration//GEN-END:variables
+class Items{
+      private String Id; 
+     public Items(String Id){
+         this.Id = Id;
+     }
+     @Override
+     public String toString(){
+         return Id;
+     }
+}
+}
